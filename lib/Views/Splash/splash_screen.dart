@@ -1,6 +1,4 @@
 import 'package:barber/Binding/bindings.dart';
-import 'package:barber/Utils/global_variables.dart';
-import 'package:barber/Views/Auth/login_view.dart';
 import 'package:barber/Views/Landing/landing_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,9 +16,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     InitBinding();
     Future.delayed(const Duration(seconds: 2)).then((value) {
-      isSignedIn.value
-          ? Get.off(() => const LandingView(), binding: InitBinding())
-          : Get.off(() => LoginView());
+      // isSignedIn.value ?
+      Get.off(() => const LandingView(), binding: InitBinding());
+      // : Get.off(() => LoginView());
     });
     super.initState();
   }

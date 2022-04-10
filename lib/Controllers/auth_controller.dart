@@ -35,13 +35,14 @@ class AuthController extends GetxController {
           final authResult = await auth.signInWithCredential(credential);
           final user = authResult.user;
           if (authResult.additionalUserInfo!.isNewUser) {
+            Get.back();
             Get.to(
                 () => SignupView(uid: user!.uid, phoneNo: user.phoneNumber!));
           } else if (!authResult.additionalUserInfo!.isNewUser) {
             userID.value = user!.uid;
+            Get.back();
             Get.offAll(() => const SplashScreen());
           }
-          log('Succeeeded');
         },
         verificationFailed: (FirebaseAuthException exception) {
           log(exception.message.toString());

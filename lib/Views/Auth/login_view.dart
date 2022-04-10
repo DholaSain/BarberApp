@@ -18,7 +18,8 @@ class LoginView extends StatelessWidget {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(backgroundColor: kTransparent, elevation: 0),
+        appBar: AppBar(
+            backgroundColor: kTransparent, elevation: 0, iconTheme: iconTheme),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20),
