@@ -11,12 +11,7 @@ class UsersModel {
   DateTime? dob;
   String? aboutMe;
   bool? isRegistered;
-  bool? isDeactivated;
   bool? isBarber;
-  String? businessName;
-  String? streetAddress;
-  String? city;
-  String? province;
 
   UsersModel({
     this.uid,
@@ -29,12 +24,7 @@ class UsersModel {
     this.profileImage,
     this.aboutMe,
     this.isRegistered,
-    this.isDeactivated,
     this.isBarber,
-    this.city,
-    this.businessName,
-    this.province,
-    this.streetAddress,
   });
 
   UsersModel.fromFirestore(DocumentSnapshot docs) {
@@ -48,12 +38,7 @@ class UsersModel {
     profileImage = docs.get('profileImage');
     aboutMe = docs.get('aboutMe');
     isRegistered = docs.get('isRegistered');
-    isDeactivated = docs.get('isDeactivated');
     isBarber = docs.get('isBarber');
-    city = docs.get('city');
-    businessName = docs.get('businessName');
-    province = docs.get('province');
-    streetAddress = docs.get('streetAddress');
   }
 
   Map<String, dynamic> toJSON() {
@@ -68,12 +53,8 @@ class UsersModel {
     _data['profileImage'] = profileImage;
     _data['aboutMe'] = aboutMe;
     _data['isRegistered'] = isRegistered;
-    _data['isDeactivated'] = isDeactivated;
     _data['isBarber'] = isBarber;
-    _data['city'] = city;
-    _data['businessName'] = businessName;
-    _data['province'] = province;
-    _data['streetAddress'] = streetAddress;
+
     return _data;
   }
 
@@ -88,12 +69,8 @@ class UsersModel {
     profileImage != null ? _data['profileImage'] = profileImage : null;
     aboutMe != null ? _data['aboutMe'] = aboutMe : null;
     isRegistered != null ? _data['isRegistered'] = isRegistered : null;
-    isDeactivated != null ? _data['isDeactivated'] = isDeactivated : null;
     isBarber != null ? _data['isBarber'] = isBarber : null;
-    city != null ? _data['city'] = city : null;
-    businessName != null ? _data['businessName'] = businessName : null;
-    province != null ? _data['province'] = province : null;
-    streetAddress != null ? _data['streetAddress'] = streetAddress : null;
+
     return _data;
   }
 }

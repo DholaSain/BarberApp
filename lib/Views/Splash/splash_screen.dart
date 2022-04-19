@@ -1,7 +1,11 @@
 import 'package:barber/Binding/bindings.dart';
+<<<<<<< Updated upstream
 import 'package:barber/Utils/global_variables.dart';
 import 'package:barber/Views/Auth/login_view.dart';
 import 'package:barber/Views/Landing/landing_view.dart';
+=======
+import 'package:barber/Views/Customer/Landing/landing_view.dart';
+>>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';

@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:barber/Constants/locations.dart';
-import 'package:barber/Controllers/user_controller.dart';
 import 'package:barber/Methods/validator.dart';
 import 'package:barber/Models/user_model.dart';
 import 'package:barber/Services/db_services.dart';
@@ -10,7 +9,6 @@ import 'package:barber/Views/Splash/splash_screen.dart';
 import 'package:barber/Views/Widgets/buttons.dart';
 import 'package:barber/Views/Widgets/text_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -32,17 +30,14 @@ class SignupView extends StatelessWidget {
   final TextEditingController emailCntrlr = TextEditingController();
   final TextEditingController dobCntrlr = TextEditingController();
   final TextEditingController bNameCntrlr = TextEditingController();
-  final TextEditingController sAddressCntrlr = TextEditingController();
 
-  final TextEditingController cityCntrlr = TextEditingController();
-  final TextEditingController provinceCntrlr = TextEditingController();
-  RxBool isPunjab = false.obs;
-  RxBool isKPK = false.obs;
-  RxBool isSindh = false.obs;
-  RxBool isBalochistan = false.obs;
+  // RxBool isPunjab = false.obs;
+  // RxBool isKPK = false.obs;
+  // RxBool isSindh = false.obs;
+  // RxBool isBalochistan = false.obs;
+  // RxList<String> cities = OurLocations.punjabCities.obs;
   final _formKey = GlobalKey<FormState>();
 
-  RxList<String> cities = OurLocations.punjabCities.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,54 +56,60 @@ class SignupView extends StatelessWidget {
               const SizedBox(height: 10),
               const Text('Are you?', style: kH3),
               const SizedBox(height: 10),
-              Obx(() => Row(
-                    children: [
-                      Expanded(
-                          child: GestureDetector(
-                        onTap: () {
-                          isBarber.value = false;
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: kMainColor),
-                              color: isBarber.value ? kTransparent : kMainColor,
-                              borderRadius: const BorderRadius.horizontal(
-                                  left: Radius.circular(12))),
-                          child: Text(
-                            'Customer',
-                            style: kH3.copyWith(
+              Obx(() => Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: GestureDetector(
+                          onTap: () {
+                            isBarber.value = false;
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                // border: Border.all(color: kMainColor),
                                 color:
-                                    isBarber.value ? kBlackColor : kWhiteColor),
-                          ),
-                        ),
-                      )),
-                      // const SizedBox(width: 2),
-                      Expanded(
-                          child: GestureDetector(
-                        onTap: () {
-                          isBarber.value = true;
-                        },
-                        child: Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: kMainColor),
-                              color: isBarber.value ? kMainColor : kTransparent,
-                              borderRadius: const BorderRadius.horizontal(
-                                  right: Radius.circular(12))),
-                          child: Center(
+                                    isBarber.value ? kTransparent : kMainColor,
+                                borderRadius: BorderRadius.circular(12)),
                             child: Text(
-                              'Barber',
+                              'Customer',
                               style: kH3.copyWith(
                                   color: isBarber.value
-                                      ? kWhiteColor
-                                      : kBlackColor),
+                                      ? kBlackColor
+                                      : kWhiteColor),
                             ),
                           ),
-                        ),
-                      )),
-                    ],
+                        )),
+                        // const SizedBox(width: 2),
+                        Expanded(
+                            child: GestureDetector(
+                          onTap: () {
+                            isBarber.value = true;
+                          },
+                          child: Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                                // border: Border.all(color: kMainColor),
+                                color:
+                                    isBarber.value ? kMainColor : kTransparent,
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Center(
+                              child: Text(
+                                'Barber',
+                                style: kH3.copyWith(
+                                    color: isBarber.value
+                                        ? kWhiteColor
+                                        : kBlackColor),
+                              ),
+                            ),
+                          ),
+                        )),
+                      ],
+                    ),
                   )),
               const SizedBox(height: 20),
               Form(
@@ -189,149 +190,149 @@ class SignupView extends StatelessWidget {
               const SizedBox(height: 8),
               const Text('We\'ll email you a reservation confirmation.',
                   style: kGreyText),
-              Obx(
-                () => isBarber.value
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 20),
-                          const Text('Please provide your Business Info',
-                              style: kH3),
-                          const SizedBox(height: 10),
-                          TextAirField(
-                            validators: requiredValidator,
-                            title: 'Business name',
-                            controlller: bNameCntrlr,
-                            onchange: (val) {
-                              checkValidity()
-                                  ? isEnable.value = true
-                                  : isEnable.value = false;
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          TextAirField(
-                            validators: requiredValidator,
-                            title: 'Street Address',
-                            controlller: sAddressCntrlr,
-                            lines: 3,
-                            onchange: (val) {
-                              checkValidity()
-                                  ? isEnable.value = true
-                                  : isEnable.value = false;
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          DropDownField(
-                            listOfSelection: OurLocations.provinces,
-                            title: 'Select Province',
-                            hint: 'Select Province',
-                            onchange: (val) {
-                              log(val.toString());
-                              switch (val) {
-                                case 'Punjab':
-                                  {
-                                    provinceCntrlr.text = val!;
-                                    cityCntrlr.text =
-                                        OurLocations.punjabCities[0];
-                                    isPunjab.value = true;
-                                    isKPK.value = false;
-                                    isSindh.value = false;
-                                    isBalochistan.value = false;
-                                    log(cityCntrlr.text);
-                                  }
-                                  break;
-                                case 'KPK':
-                                  {
-                                    provinceCntrlr.text = val!;
-                                    cityCntrlr.text = OurLocations.kpkCities[0];
-                                    isPunjab.value = false;
-                                    isKPK.value = true;
-                                    isSindh.value = false;
-                                    isBalochistan.value = false;
-                                  }
-                                  break;
-                                case 'Sindh':
-                                  {
-                                    provinceCntrlr.text = val!;
-                                    cityCntrlr.text =
-                                        OurLocations.sindhCities[0];
-                                    isPunjab.value = false;
-                                    isKPK.value = false;
-                                    isSindh.value = true;
-                                    isBalochistan.value = false;
-                                  }
-                                  break;
-                                case 'Balochistan':
-                                  {
-                                    provinceCntrlr.text = val!;
-                                    cityCntrlr.text =
-                                        OurLocations.balochistanCities[0];
-                                    isPunjab.value = false;
-                                    isKPK.value = false;
-                                    isSindh.value = false;
-                                    isBalochistan.value = true;
-                                  }
-                                  break;
-                                default:
-                              }
-                              provinceCntrlr.text = val!;
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          Obx(
-                            () => Column(
-                              children: [
-                                isPunjab.value
-                                    ? DropDownField(
-                                        listOfSelection:
-                                            OurLocations.punjabCities,
-                                        title: 'Select City',
-                                        hint: cityCntrlr.text,
-                                        onchange: (val) {
-                                          cityCntrlr.text = val!;
-                                        },
-                                      )
-                                    : const SizedBox(),
-                                isKPK.value
-                                    ? DropDownField(
-                                        listOfSelection: OurLocations.kpkCities,
-                                        title: 'Select City',
-                                        hint: cityCntrlr.text,
-                                        onchange: (val) {
-                                          cityCntrlr.text = val!;
-                                        },
-                                      )
-                                    : const SizedBox(),
-                                isSindh.value
-                                    ? DropDownField(
-                                        listOfSelection:
-                                            OurLocations.sindhCities,
-                                        title: 'Select City',
-                                        hint: cityCntrlr.text,
-                                        onchange: (val) {
-                                          cityCntrlr.text = val!;
-                                        },
-                                      )
-                                    : const SizedBox(),
-                                isBalochistan.value
-                                    ? DropDownField(
-                                        listOfSelection:
-                                            OurLocations.balochistanCities,
-                                        title: 'Select City',
-                                        hint: cityCntrlr.text,
-                                        onchange: (val) {
-                                          cityCntrlr.text = val!;
-                                        },
-                                      )
-                                    : const SizedBox(),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                        ],
-                      )
-                    : const SizedBox(),
-              ),
+              // Obx(
+              //   () => isBarber.value
+              //       ? Column(
+              //           crossAxisAlignment: CrossAxisAlignment.start,
+              //           children: [
+              //             const SizedBox(height: 20),
+              //             const Text('Please provide your Business Info',
+              //                 style: kH3),
+              //             const SizedBox(height: 10),
+              //             TextAirField(
+              //               validators: requiredValidator,
+              //               title: 'Business name',
+              //               controlller: bNameCntrlr,
+              //               onchange: (val) {
+              //                 checkValidity()
+              //                     ? isEnable.value = true
+              //                     : isEnable.value = false;
+              //               },
+              //             ),
+              //             const SizedBox(height: 10),
+              //             TextAirField(
+              //               validators: requiredValidator,
+              //               title: 'Street Address',
+              //               controlller: sAddressCntrlr,
+              //               lines: 3,
+              //               onchange: (val) {
+              //                 checkValidity()
+              //                     ? isEnable.value = true
+              //                     : isEnable.value = false;
+              //               },
+              //             ),
+              //             const SizedBox(height: 10),
+              //             DropDownField(
+              //               listOfSelection: OurLocations.provinces,
+              //               title: 'Select Province',
+              //               hint: 'Select Province',
+              //               onchange: (val) {
+              //                 log(val.toString());
+              //                 switch (val) {
+              //                   case 'Punjab':
+              //                     {
+              //                       provinceCntrlr.text = val!;
+              //                       cityCntrlr.text =
+              //                           OurLocations.punjabCities[0];
+              //                       isPunjab.value = true;
+              //                       isKPK.value = false;
+              //                       isSindh.value = false;
+              //                       isBalochistan.value = false;
+              //                       log(cityCntrlr.text);
+              //                     }
+              //                     break;
+              //                   case 'KPK':
+              //                     {
+              //                       provinceCntrlr.text = val!;
+              //                       cityCntrlr.text = OurLocations.kpkCities[0];
+              //                       isPunjab.value = false;
+              //                       isKPK.value = true;
+              //                       isSindh.value = false;
+              //                       isBalochistan.value = false;
+              //                     }
+              //                     break;
+              //                   case 'Sindh':
+              //                     {
+              //                       provinceCntrlr.text = val!;
+              //                       cityCntrlr.text =
+              //                           OurLocations.sindhCities[0];
+              //                       isPunjab.value = false;
+              //                       isKPK.value = false;
+              //                       isSindh.value = true;
+              //                       isBalochistan.value = false;
+              //                     }
+              //                     break;
+              //                   case 'Balochistan':
+              //                     {
+              //                       provinceCntrlr.text = val!;
+              //                       cityCntrlr.text =
+              //                           OurLocations.balochistanCities[0];
+              //                       isPunjab.value = false;
+              //                       isKPK.value = false;
+              //                       isSindh.value = false;
+              //                       isBalochistan.value = true;
+              //                     }
+              //                     break;
+              //                   default:
+              //                 }
+              //                 provinceCntrlr.text = val!;
+              //               },
+              //             ),
+              //             const SizedBox(height: 10),
+              //             Obx(
+              //               () => Column(
+              //                 children: [
+              //                   isPunjab.value
+              //                       ? DropDownField(
+              //                           listOfSelection:
+              //                               OurLocations.punjabCities,
+              //                           title: 'Select City',
+              //                           hint: cityCntrlr.text,
+              //                           onchange: (val) {
+              //                             cityCntrlr.text = val!;
+              //                           },
+              //                         )
+              //                       : const SizedBox(),
+              //                   isKPK.value
+              //                       ? DropDownField(
+              //                           listOfSelection: OurLocations.kpkCities,
+              //                           title: 'Select City',
+              //                           hint: cityCntrlr.text,
+              //                           onchange: (val) {
+              //                             cityCntrlr.text = val!;
+              //                           },
+              //                         )
+              //                       : const SizedBox(),
+              //                   isSindh.value
+              //                       ? DropDownField(
+              //                           listOfSelection:
+              //                               OurLocations.sindhCities,
+              //                           title: 'Select City',
+              //                           hint: cityCntrlr.text,
+              //                           onchange: (val) {
+              //                             cityCntrlr.text = val!;
+              //                           },
+              //                         )
+              //                       : const SizedBox(),
+              //                   isBalochistan.value
+              //                       ? DropDownField(
+              //                           listOfSelection:
+              //                               OurLocations.balochistanCities,
+              //                           title: 'Select City',
+              //                           hint: cityCntrlr.text,
+              //                           onchange: (val) {
+              //                             cityCntrlr.text = val!;
+              //                           },
+              //                         )
+              //                       : const SizedBox(),
+              //                 ],
+              //               ),
+              //             ),
+              //             const SizedBox(height: 10),
+              //           ],
+              //         )
+              //       : const SizedBox(),
+              // ),
               const SizedBox(height: 30),
               DynamicHeavyButton(
                 width: double.infinity,
@@ -350,12 +351,7 @@ class SignupView extends StatelessWidget {
                       dob: dob,
                       aboutMe: '',
                       isRegistered: true,
-                      isDeactivated: false,
                       isBarber: isBarber.value,
-                      businessName: bNameCntrlr.text,
-                      streetAddress: sAddressCntrlr.text,
-                      city: cityCntrlr.text,
-                      province: provinceCntrlr.text,
                     );
                     await UserDBServices().createUser(usersModel);
                     Get.offAll(() => const SplashScreen());

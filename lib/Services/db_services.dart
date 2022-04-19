@@ -50,12 +50,12 @@ class UserDBServices {
     }
   }
 
-  Future<void> activateUser(bool status) async {
+  Future<void> switchProfile(bool status) async {
     try {
       await firestore
           .collection(users)
           .doc(userID.value)
-          .update({'isDeactivated': status});
+          .update({'isBarber': status});
     } catch (e) {
       errorOverlay(e.toString());
     }
