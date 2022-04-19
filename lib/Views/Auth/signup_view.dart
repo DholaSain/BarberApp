@@ -354,7 +354,7 @@ class SignupView extends StatelessWidget {
                       isBarber: isBarber.value,
                     );
                     await UserDBServices().createUser(usersModel);
-                    Get.offAll(() => const SplashScreen());
+                    Get.offAll(() => SplashScreen());
                   }
                 },
                 onDisableTap: () {

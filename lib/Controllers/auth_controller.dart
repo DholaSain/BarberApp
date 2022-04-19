@@ -39,7 +39,7 @@ class AuthController extends GetxController {
                 () => SignupView(uid: user!.uid, phoneNo: user.phoneNumber!));
           } else if (!authResult.additionalUserInfo!.isNewUser) {
             userID.value = user!.uid;
-            Get.offAll(() => const SplashScreen());
+            Get.offAll(() => SplashScreen());
           }
           log('Succeeeded');
         },
@@ -84,7 +84,7 @@ class AuthController extends GetxController {
       } else if (!authResult.additionalUserInfo!.isNewUser) {
         userID.value = user!.uid;
         Get.back();
-        Get.offAll(() => const SplashScreen());
+        Get.offAll(() => SplashScreen());
       }
     } catch (e) {
       Get.back();
@@ -97,6 +97,6 @@ class AuthController extends GetxController {
   Future<void> logout() async {
     await auth.signOut();
     Get.find<UsersController>().clearUser();
-    Get.offAll(() => const SplashScreen());
+    Get.offAll(() => SplashScreen());
   }
 }
