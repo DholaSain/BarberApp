@@ -44,114 +44,115 @@ class AccountView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               isSignedIn.value
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        UserCircularImage(
-                          radius: 60,
-                          imageURL: userCntlrl.user?.profileImage,
-                        ),
-                        const SizedBox(height: 6),
-                        userCntlrl.user != null
-                            ? Text(
-                                '${userCntlrl.user?.firstName} ${userCntlrl.user?.lastName}',
-                                style: kH1)
-                            : const Text(''),
-                        const SizedBox(height: 12),
-                        InkWell(
-                          onTap: () {
-                            Get.to(() => ViewAndEditProfile());
-                          },
-                          child: const Text(
-                            'View profile',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
+                  ? Obx(() => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          UserCircularImage(
+                            radius: 60,
+                            imageURL: userCntlrl.user?.profileImage,
+                          ),
+                          const SizedBox(height: 6),
+                          userCntlrl.user != null
+                              ? Text(
+                                  '${userCntlrl.user!.firstName} ${userCntlrl.user!.lastName}',
+                                  style: kH1)
+                              : const Text(''),
+                          const SizedBox(height: 12),
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => ViewAndEditProfile());
+                            },
+                            child: const Text(
+                              'View profile',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        ListTile(
-                          leading: const Icon(Glyphicon.toggles),
-                          title: Text(
-                              userCntlrl.user!.isBarber!
-                                  ? 'Switch to Customer Profile'
-                                  : 'Switch to Barber Profile',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          subtitle: const Text(
-                              'Add your salon online and earn more.'),
-                          onTap: () {
-                            Get.defaultDialog(
-                                title: userCntlrl.user!.isBarber!
-                                    ? 'Switch to Customer Profile?'
-                                    : 'Switch to Barber Profile?',
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                        'Do you really want to switch your profile? ',
-                                        textAlign: TextAlign.center),
-                                    const SizedBox(height: 8),
-                                    const Divider(),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Expanded(
-                                          child: CupertinoDialogAction(
-                                              child: const Text('Cancel'),
-                                              isDestructiveAction: true,
-                                              onPressed: () {
-                                                Get.back();
-                                              }),
-                                        ),
-                                        Expanded(
-                                          child: CupertinoDialogAction(
-                                              child: const Text(
-                                                'Switch',
-                                                style: TextStyle(
-                                                    color: kMainColor),
-                                              ),
-                                              isDefaultAction: true,
-                                              onPressed: () async {
-                                                loadingOverlay('Switching');
-                                                bool convert =
-                                                    userCntlrl.user!.isBarber!
-                                                        ? false
-                                                        : true;
-                                                await UserDBServices()
-                                                    .switchProfile(convert);
-                                                Get.find<UsersController>()
-                                                    .onInit();
-                                                Get.offAll(
-                                                    () => SplashScreen());
-                                              }),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                titlePadding: const EdgeInsets.only(top: 15),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 22, vertical: 0));
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        const Divider(),
-                        const SizedBox(height: 20),
-                        const Text('Services', style: kH1),
-                        const SizedBox(height: 20),
-                        ListTile(
-                          onTap: () {
-                            // Get.to(() => ForRentProdcuts(), binding: MyProductBinding());
-                          },
-                          title: const Text('Bookings'),
-                          leading: const Icon(Icons.view_list_rounded),
-                          trailing: const Icon(Icons.arrow_forward_ios_rounded),
-                        ),
-                      ],
-                    )
+                          const SizedBox(height: 20),
+                          ListTile(
+                            leading: const Icon(Glyphicon.toggles),
+                            title: Text(
+                                userCntlrl.user!.isBarber!
+                                    ? 'Switch to Customer Profile'
+                                    : 'Switch to Barber Profile',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            subtitle: const Text(
+                                'Add your salon online and earn more.'),
+                            onTap: () {
+                              Get.defaultDialog(
+                                  title: userCntlrl.user!.isBarber!
+                                      ? 'Switch to Customer Profile?'
+                                      : 'Switch to Barber Profile?',
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const SizedBox(height: 8),
+                                      const Text(
+                                          'Do you really want to switch your profile? ',
+                                          textAlign: TextAlign.center),
+                                      const SizedBox(height: 8),
+                                      const Divider(),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Expanded(
+                                            child: CupertinoDialogAction(
+                                                child: const Text('Cancel'),
+                                                isDestructiveAction: true,
+                                                onPressed: () {
+                                                  Get.back();
+                                                }),
+                                          ),
+                                          Expanded(
+                                            child: CupertinoDialogAction(
+                                                child: const Text(
+                                                  'Switch',
+                                                  style: TextStyle(
+                                                      color: kMainColor),
+                                                ),
+                                                isDefaultAction: true,
+                                                onPressed: () async {
+                                                  loadingOverlay('Switching');
+                                                  bool convert =
+                                                      userCntlrl.user!.isBarber!
+                                                          ? false
+                                                          : true;
+                                                  await UserDBServices()
+                                                      .switchProfile(convert);
+                                                  Get.find<UsersController>()
+                                                      .onInit();
+                                                  Get.offAll(
+                                                      () => SplashScreen());
+                                                }),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  titlePadding: const EdgeInsets.only(top: 15),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 22, vertical: 0));
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          const Divider(),
+                          const SizedBox(height: 20),
+                          const Text('Services', style: kH1),
+                          const SizedBox(height: 20),
+                          ListTile(
+                            onTap: () {
+                              // Get.to(() => ForRentProdcuts(), binding: MyProductBinding());
+                            },
+                            title: const Text('Bookings'),
+                            leading: const Icon(Icons.view_list_rounded),
+                            trailing:
+                                const Icon(Icons.arrow_forward_ios_rounded),
+                          ),
+                        ],
+                      ))
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

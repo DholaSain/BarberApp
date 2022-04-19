@@ -1,31 +1,32 @@
-<<<<<<< Updated upstream:lib/Views/Landing/landing_view.dart
-=======
 import 'package:barber/Constants/colors.dart';
 import 'package:barber/Views/Customer/Account/account_view.dart';
 import 'package:barber/Views/Customer/Favorites/favt_view.dart';
 import 'package:barber/Views/Customer/Inbox/inbox_view.dart';
+import 'package:glyphicon/glyphicon.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
->>>>>>> Stashed changes:lib/Views/Customer/Landing/landing_view.dart
 import 'package:flutter/material.dart';
 
-<<<<<<< Updated upstream:lib/Views/Landing/landing_view.dart
-class LandingView extends StatelessWidget {
-=======
 import '../Home/home_view.dart';
 
 class LandingView extends StatefulWidget {
->>>>>>> Stashed changes:lib/Views/Customer/Landing/landing_view.dart
   const LandingView({Key? key}) : super(key: key);
 
   @override
+  State<LandingView> createState() => _LandingViewState();
+}
+
+class _LandingViewState extends State<LandingView> {
+  final isSigned = false;
+  PersistentTabController controller = PersistentTabController(initialIndex: 0);
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream:lib/Views/Landing/landing_view.dart
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('LandingView'),
-      ),
-    );
-=======
     _buildScreens() {
       return [
         HomeView(),
@@ -90,6 +91,5 @@ class LandingView extends StatefulWidget {
             curve: Curves.easeInCirc,
             duration: Duration(milliseconds: 200)),
         navBarStyle: NavBarStyle.style12);
->>>>>>> Stashed changes:lib/Views/Customer/Landing/landing_view.dart
   }
 }

@@ -18,9 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     InitBinding();
     Future.delayed(const Duration(seconds: 2)).then((value) {
-      isSignedIn.value
-          ? Get.off(() => LandingView(), binding: InitBinding())
-          : Get.off(() => LoginView());
+      Get.off(() => LandingView(), binding: InitBinding());
     });
     super.initState();
   }

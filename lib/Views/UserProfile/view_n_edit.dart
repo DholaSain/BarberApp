@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:barber/Constants/colors.dart';
-import 'package:barber/Constants/text_styles.dart';
 import 'package:barber/Controllers/user_controller.dart';
 import 'package:barber/Methods/overlays.dart';
 import 'package:barber/Models/user_model.dart';
@@ -10,7 +9,6 @@ import 'package:barber/Services/storage_service.dart';
 import 'package:barber/Utils/date_picker.dart';
 import 'package:barber/Utils/image_picker.dart';
 import 'package:barber/Views/Widgets/net_image.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
