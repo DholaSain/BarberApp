@@ -1,7 +1,7 @@
 import 'package:barber/Constants/colors.dart';
 import 'package:barber/Views/Barber/BAccount/b_account_view.dart';
+import 'package:barber/Views/Barber/BBookings/b_booking_view.dart';
 import 'package:barber/Views/Barber/BHome/b_home_view.dart';
-import 'package:barber/Views/Barber/BSaloons/b_salon_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:glyphicon/glyphicon.dart';
@@ -15,7 +15,6 @@ class BLandingView extends StatefulWidget {
 }
 
 class _BLandingViewState extends State<BLandingView> {
-  final isSigned = false;
   PersistentTabController controller = PersistentTabController(initialIndex: 0);
 
   @override
@@ -28,7 +27,7 @@ class _BLandingViewState extends State<BLandingView> {
     _buildScreens() {
       return [
         BHomeView(),
-        BSalonView(),
+        BBookings(),
         BAccountView(),
       ];
     }
@@ -36,16 +35,16 @@ class _BLandingViewState extends State<BLandingView> {
     List<PersistentBottomNavBarItem> _navBarsItems() {
       return [
         PersistentBottomNavBarItem(
-          icon: const Icon(Glyphicon.house_fill),
-          inactiveIcon: const Icon(Glyphicon.house),
+          icon: const Icon(Glyphicon.shop_window),
+          inactiveIcon: const Icon(Glyphicon.shop),
           title: ("Home"),
           activeColorPrimary: kMainColor,
           inactiveColorPrimary: kGreyColor,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Glyphicon.inbox_fill),
-          inactiveIcon: const Icon(Glyphicon.inbox),
-          title: ("My Salons"),
+          icon: const Icon(Glyphicon.bag_fill),
+          inactiveIcon: const Icon(Glyphicon.bag_dash),
+          title: ("My Bookings"),
           activeColorPrimary: kMainColor,
           inactiveColorPrimary: kGreyColor,
         ),
@@ -69,9 +68,6 @@ class _BLandingViewState extends State<BLandingView> {
         resizeToAvoidBottomInset: true,
         stateManagement: true,
         hideNavigationBarWhenKeyboardShows: true,
-        // decoration: NavBarDecoration(
-        //     borderRadius: BorderRadius.circular(20.0),
-        //     colorBehindNavBar: kWhiteColor),
         popAllScreensOnTapOfSelectedTab: true,
         popActionScreens: PopActionScreensType.all,
         itemAnimationProperties: const ItemAnimationProperties(

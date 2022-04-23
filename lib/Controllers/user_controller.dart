@@ -11,8 +11,8 @@ class UsersController extends GetxController {
   @override
   void onInit() {
     if (isSignedIn.value) {
-      usersData.bindStream(
-          Stream.fromFuture(UserDBServices().getUser(userID.value)));
+      usersData
+          .bindStream(Stream.fromFuture(DBServices().getUser(userID.value)));
     }
 
     super.onInit();

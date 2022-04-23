@@ -37,20 +37,12 @@ class LoginNowBox extends StatelessWidget {
               Get.to(() => LoginView());
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 10,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                color: kWhiteColor,
-              ),
+                  borderRadius: BorderRadius.circular(40), color: kWhiteColor),
               child: const Text(
                 'Log in now',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
           ),

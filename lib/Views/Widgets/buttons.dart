@@ -12,6 +12,7 @@ class DynamicHeavyButton extends StatelessWidget {
     this.width,
     this.onDisableTap,
     this.horizontalMargin,
+    this.verticalMargin,
     this.color = kMainColor,
   }) : super(key: key);
 
@@ -20,13 +21,14 @@ class DynamicHeavyButton extends StatelessWidget {
   final VoidCallback? onDisableTap;
   final String lable;
   final double? height, width;
-  final double? horizontalMargin;
+  final double? horizontalMargin, verticalMargin;
   final Color? color;
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Container(
-        margin: EdgeInsets.symmetric(horizontal: horizontalMargin ?? 0),
+        margin: EdgeInsets.symmetric(
+            horizontal: horizontalMargin ?? 0, vertical: verticalMargin ?? 0),
         width: width,
         height: height,
         decoration: BoxDecoration(

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:glyphicon/glyphicon.dart';
 
 class NetImage extends StatelessWidget {
   const NetImage({Key? key, required this.imagePath, this.boxfit})
@@ -10,14 +11,13 @@ class NetImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     return CachedNetworkImage(
       imageUrl: imagePath,
       fit: boxfit ?? BoxFit.cover,
       progressIndicatorBuilder: (context, url, downloadProgress) => Center(
           child: CircularProgressIndicator.adaptive(
               value: downloadProgress.progress)),
-      errorWidget: (context, url, error) => const Icon(Icons.error),
+      errorWidget: (context, url, error) => const Icon(Glyphicon.image),
     );
   }
 }

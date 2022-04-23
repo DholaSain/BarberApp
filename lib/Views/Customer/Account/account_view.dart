@@ -120,7 +120,7 @@ class AccountView extends StatelessWidget {
                                                       userCntlrl.user!.isBarber!
                                                           ? false
                                                           : true;
-                                                  await UserDBServices()
+                                                  await DBServices()
                                                       .switchProfile(convert);
                                                   Get.find<UsersController>()
                                                       .onInit();
@@ -205,72 +205,4 @@ class AccountView extends StatelessWidget {
       ),
     );
   }
-
-  // Widget userWidgets() {
-  //   // final user = userCntlrl.user;
-  //   return Obx(
-  //     () => userCntlrl.user!.isBarber!
-  //         ? Column(
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               BusinessCircularImage(
-  //                 radius: 40,
-  //                 imageURL: userCntlrl.user?.profileImage,
-  //               ),
-  //               const SizedBox(height: 15),
-  //               InkWell(
-  //                 onTap: () {
-  //                   Get.to(() => ViewAndEditProfile());
-  //                   // Get.to(() => UserProfileView(), binding: MyProductBinding());
-  //                 },
-  //                 child: const Text(
-  //                   'View profile',
-  //                   style: TextStyle(
-  //                     fontSize: 20,
-  //                     fontWeight: FontWeight.bold,
-  //                     decoration: TextDecoration.underline,
-  //                   ),
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 20),
-  //               const ListTile(
-  //                 leading: Icon(Glyphicon.globe),
-  //                 title: Text('Earn more with our Online platform, Barberia'),
-  //               ),
-  //               const SizedBox(height: 10),
-  //               const Divider(),
-  //               const SizedBox(height: 20),
-  //               const Text('Services', style: kH1),
-  //               const SizedBox(height: 20),
-  //               ListTile(
-  //                 onTap: () {
-  //                   // Get.to(() => Orders(), binding: OrdersBining());
-  //                 },
-  //                 title: const Text('My Services'),
-  //                 leading: const Icon(Icons.line_style_rounded),
-  //                 trailing: const Icon(Icons.arrow_forward_ios_rounded),
-  //               ),
-  //               const Divider(),
-  //               ListTile(
-  //                 onTap: () {
-  //                   // Get.to(() => ForRentProdcuts(), binding: MyProductBinding());
-  //                 },
-  //                 title: const Text('Bookings'),
-  //                 leading: const Icon(Icons.view_list_rounded),
-  //                 trailing: const Icon(Icons.arrow_forward_ios_rounded),
-  //               ),
-  //               const Divider(),
-  //               ListTile(
-  //                 onTap: () {
-  //                   // Get.to(() => MyRentProducts(), binding: CustomersOrdersBining());
-  //                 },
-  //                 title: const Text('Add New Service'),
-  //                 leading: const Icon(Icons.real_estate_agent_sharp),
-  //                 trailing: const Icon(Icons.arrow_forward_ios_rounded),
-  //               ),
-  //             ],
-  //           )
-  //         :
-  //   );
-  // }
 }

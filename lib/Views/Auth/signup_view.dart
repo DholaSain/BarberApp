@@ -353,7 +353,7 @@ class SignupView extends StatelessWidget {
                       isRegistered: true,
                       isBarber: isBarber.value,
                     );
-                    await UserDBServices().createUser(usersModel);
+                    await DBServices().createUser(usersModel);
                     Get.offAll(() => SplashScreen());
                   }
                 },

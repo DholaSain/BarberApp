@@ -16,6 +16,8 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       body: Obx(() {
         if (userCntrlr.user == null) {
+          Future.delayed(const Duration(seconds: 1)).then((value) =>
+              Get.off(() => const LandingView(), binding: InitBinding()));
           return Center(child: Lottie.asset('assets/loadinggirl.json'));
         } else {
           Future.delayed(const Duration(seconds: 1)).then((value) =>

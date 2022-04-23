@@ -103,14 +103,14 @@ class DropDownField extends StatelessWidget {
     required this.onchange,
     required this.hint,
     required this.title,
-    // this.validators,
+    this.validators,
   }) : super(key: key);
 
   final List<String> listOfSelection;
   final Function(String?)? onchange;
   final String hint;
   final String title;
-  // final String? Function(String?)? validators;
+  final String? Function(String?)? validators;
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +120,7 @@ class DropDownField extends StatelessWidget {
         Text(' ' + title, style: kBoldText),
         const SizedBox(height: 4),
         DropdownButtonFormField2(
+          validator: validators,
           // isExpanded: true,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.zero,
@@ -138,12 +139,7 @@ class DropDownField extends StatelessWidget {
           items: listOfSelection
               .map((item) => DropdownMenuItem<String>(
                     value: item,
-                    child: Text(
-                      item,
-                      style: const TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
+                    child: Text(item, style: const TextStyle(fontSize: 14)),
                   ))
               .toList(),
           onChanged: onchange,

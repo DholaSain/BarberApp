@@ -74,7 +74,7 @@ class ViewAndEditProfile extends StatelessWidget {
                     profileImage: dpUpdateURL,
                     dob: dob,
                   );
-                  await UserDBServices().updateUser(usersModel);
+                  await DBServices().updateUser(usersModel);
                   usersCtlr.onInit();
                   Get.back();
                 } catch (e) {
