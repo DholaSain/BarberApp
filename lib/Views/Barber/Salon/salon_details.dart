@@ -3,6 +3,7 @@ import 'package:barber/Constants/text_styles.dart';
 import 'package:barber/Controllers/b_salon_controller.dart';
 import 'package:barber/Models/salon_model.dart';
 import 'package:barber/Views/Barber/Salon/add_service.dart';
+import 'package:barber/Views/ServiceDetails/service_details_view.dart';
 import 'package:barber/Views/Widgets/mycontainer.dart';
 import 'package:barber/Views/Widgets/net_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -148,7 +149,10 @@ class SalonDetails extends StatelessWidget {
                                         salon.services![index];
 
                                     return ListTile(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Get.to(() => ServiceDetailsView(
+                                            service: service));
+                                      },
                                       contentPadding: EdgeInsets.zero,
                                       horizontalTitleGap: 10,
                                       visualDensity: const VisualDensity(
@@ -179,7 +183,7 @@ class SalonDetails extends StatelessWidget {
                           Get.to(() => AddServiceView(salonId: salon.uid!));
                         },
                         child: MyContainer(
-                          color: kWhiteColor,
+                          color: kMainFadedColor,
                           vPadding: 10,
                           hPadding: 12,
                           radius: 12,

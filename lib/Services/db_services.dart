@@ -130,6 +130,31 @@ class DBServices {
     });
   }
 
+  Future<List<SalonModel>> getAllSalons() async {
+    return await firestore
+        .collection(salons)
+        .get()
+        .then((QuerySnapshot snapshot) async {
+      List<SalonModel> retVal = [];
+      for (var docs in snapshot.docs) {
+        List<ServicesModel> services = await firestore
+            .collection(salons)
+            .doc(docs.id)
+            .collection(servicesRef)
+            .get()
+            .then((QuerySnapshot sSnapshot) {
+          List<ServicesModel> sRetVal = [];
+          for (var service in sSnapshot.docs) {
+            sRetVal.add(ServicesModel.fromFirestore(service));
+          }
+          return sRetVal;
+        });
+        retVal.add(SalonModel.fromFirestore(docs, services));
+      }
+      return retVal;
+    });
+  }
+
   Future<void> addService(String salonId, ServicesModel servicesModel) async {
     try {
       String uid = firestore

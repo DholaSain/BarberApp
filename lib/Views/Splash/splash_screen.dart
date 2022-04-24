@@ -1,5 +1,6 @@
 import 'package:barber/Binding/bindings.dart';
 import 'package:barber/Controllers/user_controller.dart';
+import 'package:barber/Utils/global_variables.dart';
 import 'package:barber/Views/Barber/BLandingView/b_landing_view.dart';
 import 'package:barber/Views/Customer/Landing/landing_view.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,11 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        if (userCntrlr.user == null) {
+        if (!isSignedIn.value) {
           Future.delayed(const Duration(seconds: 1)).then((value) =>
               Get.off(() => const LandingView(), binding: InitBinding()));
+          return Center(child: Lottie.asset('assets/loadinggirl.json'));
+        } else if (userCntrlr.user == null) {
           return Center(child: Lottie.asset('assets/loadinggirl.json'));
         } else {
           Future.delayed(const Duration(seconds: 1)).then((value) =>
