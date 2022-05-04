@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:barber/Methods/overlays.dart';
+import 'package:barber/Models/booking_model.dart';
 import 'package:barber/Models/salon_model.dart';
 import 'package:barber/Models/user_model.dart';
 import 'package:barber/Utils/global_variables.dart';
@@ -11,6 +12,7 @@ class DBServices {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   static String users = 'users';
   static String salons = 'salons';
+  static String bookings = 'bookings';
   static String servicesRef = 'services';
 
   Future<void> createUser(UsersModel usersModel) async {
@@ -82,7 +84,7 @@ class DBServices {
         'likes': [],
         'isActive': true,
         'isMenSalon': salonModel.isMenSalon,
-        'isHomeService': salonModel.isHomeService,
+        'serviceType': salonModel.serviceType,
       });
     } catch (e) {
       errorOverlay(e.toString());
@@ -182,5 +184,44 @@ class DBServices {
       errorOverlay(e.toString());
       log(e.toString());
     }
+  }
+
+  Future<void> addBooking(BookingModel bookingModel) async {
+    try {
+      String uid = firestore.collection(bookings).doc().id;
+      bookingModel.uid = uid;
+      await firestore.collection(bookings).doc(uid).set(bookingModel.toJSON());
+    } catch (e) {
+      errorOverlay(e.toString());
+      log(e.toString());
+    }
+  }
+
+  Stream<List<BookingModel>> bookingsStreamCustomer(String userId) {
+    return firestore
+        .collection(bookings)
+        .where('customerId', isEqualTo: userId)
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
+      List<BookingModel> retVal = [];
+      for (var booking in snapshot.docs) {
+        retVal.add(BookingModel.fromFirestore(booking));
+      }
+      return retVal;
+    });
+  }
+
+  Stream<List<BookingModel>> bookingsStreamOwner(String userId) {
+    return firestore
+        .collection(bookings)
+        .where('ownerId', isEqualTo: userId)
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
+      List<BookingModel> retVal = [];
+      for (var booking in snapshot.docs) {
+        retVal.add(BookingModel.fromFirestore(booking));
+      }
+      return retVal;
+    });
   }
 }

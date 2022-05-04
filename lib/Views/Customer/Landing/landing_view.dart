@@ -1,7 +1,7 @@
 import 'package:barber/Constants/colors.dart';
 import 'package:barber/Views/Customer/Account/account_view.dart';
+import 'package:barber/Views/Customer/Bookings/bookings_view.dart';
 import 'package:barber/Views/Customer/Favorites/favt_view.dart';
-import 'package:barber/Views/Customer/Inbox/inbox_view.dart';
 import 'package:glyphicon/glyphicon.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
@@ -31,7 +31,7 @@ class _LandingViewState extends State<LandingView> {
       return [
         HomeView(),
         FavtView(),
-        InboxView(),
+        BookingsView(),
         AccountView(),
       ];
     }
@@ -53,9 +53,9 @@ class _LandingViewState extends State<LandingView> {
           inactiveColorPrimary: kGreyColor,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Glyphicon.inbox_fill),
-          inactiveIcon: const Icon(Glyphicon.inbox),
-          title: ("Inbox"),
+          icon: const Icon(Glyphicon.bag_check_fill),
+          inactiveIcon: const Icon(Glyphicon.bag_check),
+          title: ("Bookings"),
           activeColorPrimary: kMainColor,
           inactiveColorPrimary: kGreyColor,
         ),

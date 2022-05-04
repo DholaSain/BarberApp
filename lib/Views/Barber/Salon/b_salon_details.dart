@@ -13,8 +13,8 @@ import 'package:get/get.dart';
 import 'package:glyphicon/glyphicon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SalonDetails extends StatelessWidget {
-  SalonDetails({Key? key, required this.salonId}) : super(key: key);
+class BSalonDetails extends StatelessWidget {
+  BSalonDetails({Key? key, required this.salonId}) : super(key: key);
   final String salonId;
   final BSalonController bSalonCntrlr = Get.find<BSalonController>();
   final CarouselController _controller = CarouselController();

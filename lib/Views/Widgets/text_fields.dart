@@ -148,3 +148,94 @@ class DropDownField extends StatelessWidget {
     );
   }
 }
+
+class ChildTextField extends StatelessWidget {
+  ChildTextField({
+    Key? key,
+    this.controlller,
+    required this.title,
+    this.validators,
+    this.inputType,
+    this.onchange,
+    this.ontap,
+    this.isReadOnly,
+    this.obscure,
+    this.suffix,
+    this.prefix,
+    this.hintText,
+    this.lines,
+    this.titleStyle,
+    this.formatter,
+  }) : super(key: key);
+
+  final TextEditingController? controlller;
+  final String title;
+  final TextStyle? titleStyle;
+  final TextInputType? inputType;
+  final String? Function(String?)? validators;
+  final Function(String)? onchange;
+  final VoidCallback? ontap;
+  final bool? isReadOnly;
+  final bool? obscure;
+  final Widget? suffix;
+  final String? hintText;
+  final String? prefix;
+  final int? lines;
+  final List<TextInputFormatter>? formatter;
+
+  final InputBorder noBorderWithRadius = OutlineInputBorder(
+    borderSide: BorderSide.none,
+    borderRadius: BorderRadius.circular(10.0),
+  );
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(' ' + title, style: titleStyle),
+        const SizedBox(height: 4),
+        TextFormField(
+          obscureText: obscure ?? false,
+          readOnly: isReadOnly ?? false,
+          inputFormatters: formatter,
+          validator: validators,
+          controller: controlller,
+          cursorColor: kMainColor,
+          keyboardType: inputType,
+          textAlign: TextAlign.start,
+          onChanged: onchange,
+          maxLines: lines,
+          onTap: ontap,
+          style: const TextStyle(
+            fontSize: 15.0,
+          ),
+          decoration: InputDecoration(
+            prefixText: prefix,
+            border: InputBorder.none,
+            filled: true,
+            fillColor: kWhiteColor,
+            hintText: hintText,
+            // label: Text(title),
+            labelStyle: const TextStyle(
+              fontSize: 16.0,
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            errorStyle: const TextStyle(
+              color: kMainColor,
+            ),
+            errorBorder: errorOutlineInputBorder,
+            disabledBorder: outlineInputBorder,
+            focusedErrorBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+            // enabledBorder: OutlineInputBorder(),
+            // enabledBorder: noBorderWithRadius,
+            enabledBorder: outlineInputBorder,
+            focusedBorder: outlineInputBorder,
+            suffixIcon: suffix,
+          ),
+        ),
+      ],
+    );
+  }
+}

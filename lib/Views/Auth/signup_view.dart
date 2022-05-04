@@ -57,60 +57,52 @@ class SignupView extends StatelessWidget {
               const Text('Are you?', style: kH3),
               const SizedBox(height: 10),
               Obx(() => Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: GestureDetector(
-                          onTap: () {
-                            isBarber.value = false;
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                // border: Border.all(color: kMainColor),
-                                color:
-                                    isBarber.value ? kTransparent : kMainColor,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Text(
-                              'Customer',
-                              style: kH3.copyWith(
-                                  color: isBarber.value
-                                      ? kBlackColor
-                                      : kWhiteColor),
-                            ),
-                          ),
-                        )),
-                        // const SizedBox(width: 2),
-                        Expanded(
-                            child: GestureDetector(
-                          onTap: () {
-                            isBarber.value = true;
-                          },
-                          child: Container(
-                            height: 40,
-                            decoration: BoxDecoration(
-                                // border: Border.all(color: kMainColor),
-                                color:
-                                    isBarber.value ? kMainColor : kTransparent,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Center(
-                              child: Text(
-                                'Barber',
-                                style: kH3.copyWith(
+                  decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Row(children: [
+                    Expanded(
+                        child: GestureDetector(
+                      onTap: () {
+                        isBarber.value = false;
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            // border: Border.all(color: kMainColor),
+                            color: isBarber.value ? kTransparent : kMainColor,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Text(
+                          'Customer',
+                          style: kH3.copyWith(
+                              color:
+                                  isBarber.value ? kBlackColor : kWhiteColor),
+                        ),
+                      ),
+                    )),
+                    Expanded(
+                        child: GestureDetector(
+                            onTap: () {
+                              isBarber.value = true;
+                            },
+                            child: Container(
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    // border: Border.all(color: kMainColor),
                                     color: isBarber.value
-                                        ? kWhiteColor
-                                        : kBlackColor),
-                              ),
-                            ),
-                          ),
-                        )),
-                      ],
-                    ),
-                  )),
+                                        ? kMainColor
+                                        : kTransparent,
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: Center(
+                                    child: Text(
+                                  'Barber',
+                                  style: kH3.copyWith(
+                                      color: isBarber.value
+                                          ? kWhiteColor
+                                          : kBlackColor),
+                                )))))
+                  ]))),
               const SizedBox(height: 20),
               Form(
                   key: _formKey,

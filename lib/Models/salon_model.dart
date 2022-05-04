@@ -16,7 +16,7 @@ class SalonModel {
   bool? isActive;
   bool? isMenSalon;
 
-  bool? isHomeService;
+  int? serviceType;
 
   SalonModel({
     this.uid,
@@ -33,7 +33,7 @@ class SalonModel {
     this.likes,
     this.isActive,
     this.isMenSalon,
-    this.isHomeService,
+    this.serviceType,
   });
 
   SalonModel.fromFirestore(
@@ -51,7 +51,7 @@ class SalonModel {
     likes = docs.get('likes');
     isActive = docs.get('isActive');
     isMenSalon = docs.get('isMenSalon');
-    isHomeService = docs.get('isHomeService');
+    serviceType = docs.get('serviceType');
     services = servicess;
   }
 }

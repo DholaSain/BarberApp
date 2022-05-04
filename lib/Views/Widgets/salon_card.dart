@@ -37,7 +37,7 @@ class SalonCardFull extends StatelessWidget {
                 offset: Offset(1, 1))
           ],
         ),
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        margin: const EdgeInsets.symmetric(vertical: 6),
         padding: const EdgeInsets.all(4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

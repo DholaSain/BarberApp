@@ -19,6 +19,7 @@ const Color kDarkBlueColor = Color(0xff141A3A);
 const Color kGreyColor = Colors.grey;
 const Color kTransparent = Colors.transparent;
 const Color kBlackColor = Colors.black;
+const Color kAmberColor = Colors.amber;
 const Color kErrorColor = Color.fromARGB(255, 139, 35, 27);
 const Color kDisableColor = Color(0xff727272);
 const Color kFadedColor = Color.fromARGB(255, 237, 237, 237);

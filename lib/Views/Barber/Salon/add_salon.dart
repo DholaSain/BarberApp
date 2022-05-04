@@ -24,7 +24,7 @@ class AddSalonView extends StatelessWidget {
   AddSalonView({Key? key}) : super(key: key);
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descController = TextEditingController();
-  RxBool isHomeService = false.obs;
+  RxInt serviceType = 0.obs;
   RxBool isMenSalon = true.obs;
   RxString address = ''.obs;
   RxString city = ''.obs;
@@ -223,19 +223,49 @@ class AddSalonView extends StatelessWidget {
                         )),
                   )),
               const SizedBox(height: 20),
-              Obx(() => MyContainer(
-                    width: double.infinity,
-                    isShadow: true,
-                    color: kWhiteColor,
-                    radius: 12,
-                    child: CheckboxListTile(
-                        title: const Text('Home Service? '),
-                        activeColor: kMainColor,
-                        value: isHomeService.value,
-                        onChanged: (value) {
-                          isHomeService.value = value!;
-                        }),
-                  )),
+              MyContainer(
+                hPadding: 10,
+                vPadding: 10,
+                width: double.infinity,
+                isShadow: true,
+                color: kWhiteColor,
+                radius: 12,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Service Type', style: kH3),
+                    const Divider(),
+                    Obx(() => Row(
+                          children: [
+                            RadioButton(
+                                activeColor: kMainColor,
+                                description: 'Salon',
+                                value: 0,
+                                groupValue: serviceType.value,
+                                onChanged: (value) {
+                                  serviceType.value = 0;
+                                }),
+                            RadioButton(
+                                activeColor: kMainColor,
+                                description: 'Home',
+                                value: 1,
+                                groupValue: serviceType.value,
+                                onChanged: (value) {
+                                  serviceType.value = 1;
+                                }),
+                            RadioButton(
+                                activeColor: kMainColor,
+                                description: 'Both',
+                                value: 2,
+                                groupValue: serviceType.value,
+                                onChanged: (value) {
+                                  serviceType.value = 2;
+                                }),
+                          ],
+                        )),
+                  ],
+                ),
+              ),
               const SizedBox(height: 20),
               Obx(() => MyContainer(
                     width: double.infinity,
@@ -294,7 +324,7 @@ class AddSalonView extends StatelessWidget {
                   latitude: lat.value,
                   longitude: long.value,
                   images: imagesURLs,
-                  isHomeService: isHomeService.value,
+                  serviceType: serviceType.value,
                   isMenSalon: isMenSalon.value,
                 );
                 await DBServices().addNewSalon(salonModel);

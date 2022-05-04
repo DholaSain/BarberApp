@@ -1,6 +1,5 @@
 import 'package:barber/Models/salon_model.dart';
 import 'package:barber/Services/db_services.dart';
-import 'package:barber/Utils/global_variables.dart';
 import 'package:get/get.dart';
 
 class SalonsController extends GetxController {
@@ -10,9 +9,7 @@ class SalonsController extends GetxController {
 
   @override
   void onInit() {
-    if (isSignedIn.value) {
-      salonsData.bindStream(Stream.fromFuture(DBServices().getAllSalons()));
-    }
+    salonsData.bindStream(Stream.fromFuture(DBServices().getAllSalons()));
 
     super.onInit();
   }

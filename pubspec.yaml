@@ -32,6 +32,10 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   url_launcher: ^6.1.0
   # connectivity_plus: ^2.3.0
+  badges: ^2.0.2
+  omni_datetime_picker: ^0.0.7
+  ticket_material: ^0.3.1
+  map_launcher: ^2.2.2
 
 dev_dependencies:
   flutter_test:

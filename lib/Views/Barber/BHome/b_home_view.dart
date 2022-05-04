@@ -2,7 +2,7 @@ import 'package:barber/Constants/colors.dart';
 import 'package:barber/Constants/text_styles.dart';
 import 'package:barber/Controllers/b_salon_controller.dart';
 import 'package:barber/Views/Barber/Salon/add_salon.dart';
-import 'package:barber/Views/Barber/Salon/salon_details.dart';
+import 'package:barber/Views/Barber/Salon/b_salon_details.dart';
 import 'package:barber/Views/Widgets/buttons.dart';
 import 'package:barber/Views/Widgets/salon_card.dart';
 import 'package:flutter/material.dart';
@@ -24,20 +24,18 @@ class BHomeView extends StatelessWidget {
           return Column(
             children: [
               ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: bSalonCntrlr.salons!.length,
-                itemBuilder: (context, index) {
-                  return SalonCardFull(
-                    salon: bSalonCntrlr.salons![index],
-                    images: bSalonCntrlr.salons![index].images!,
-                    ontap: () {
-                      Get.to(() => SalonDetails(
-                          salonId: bSalonCntrlr.salons![index].uid!));
-                    },
-                  );
-                },
-              ),
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: bSalonCntrlr.salons!.length,
+                  itemBuilder: (context, index) {
+                    return SalonCardFull(
+                        salon: bSalonCntrlr.salons![index],
+                        images: bSalonCntrlr.salons![index].images!,
+                        ontap: () {
+                          Get.to(() => BSalonDetails(
+                              salonId: bSalonCntrlr.salons![index].uid!));
+                        });
+                  }),
               Container(
                 margin: const EdgeInsets.all(15),
                 height: 200,

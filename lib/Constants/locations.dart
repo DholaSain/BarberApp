@@ -14,7 +14,7 @@ class OurLocations {
     'Murree',
     'Rahim Yar Khan',
     'Rawalpindi',
-    'Sialkot'
+    'Sialkot',
   ];
   static const List<String> sindhCities = ['Hydarabad', 'Karachi', 'Sakhar'];
   static const List<String> kpkCities = ['Abotabad', 'Peshawar'];

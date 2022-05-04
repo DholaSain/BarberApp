@@ -7,22 +7,27 @@ class DynamicHeavyButton extends StatelessWidget {
     Key? key,
     required this.isEnable,
     required this.ontap,
-    required this.lable,
+    this.lable,
+    this.child,
     this.height,
     this.width,
     this.onDisableTap,
     this.horizontalMargin,
     this.verticalMargin,
+    this.radius,
     this.color = kMainColor,
   }) : super(key: key);
 
   final RxBool isEnable;
   final VoidCallback ontap;
   final VoidCallback? onDisableTap;
-  final String lable;
+  final String? lable;
   final double? height, width;
-  final double? horizontalMargin, verticalMargin;
+  final double? horizontalMargin;
+  final double? verticalMargin;
+  final double? radius;
   final Color? color;
+  final Widget? child;
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -33,18 +38,20 @@ class DynamicHeavyButton extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           color: isEnable.value ? color : kGreyColor,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(radius ?? 12),
         ),
         child: MaterialButton(
           onPressed: isEnable.value ? ontap : onDisableTap ?? () {},
-          child: Text(
-            lable,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: kWhiteColor,
-            ),
-          ),
+          child: lable != null
+              ? Text(
+                  lable!,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: kWhiteColor,
+                  ),
+                )
+              : child,
         ),
       ),
     );

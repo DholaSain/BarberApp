@@ -16,7 +16,7 @@ class OtpView extends StatelessWidget {
   OtpView({Key? key, required this.phoneNumber}) : super(key: key);
   final String phoneNumber;
   String otpCode = '';
-  RxBool isLoading = false.obs;
+  final RxBool isLoading = false.obs;
   final AuthController authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
