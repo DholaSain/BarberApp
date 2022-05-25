@@ -18,7 +18,7 @@ class LoginView extends StatelessWidget {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(backgroundColor: kTransparent, elevation: 0),
+        appBar: AppBar(backgroundColor: kTransparent, elevation: 0, iconTheme: iconTheme),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20),
@@ -41,9 +41,7 @@ class LoginView extends StatelessWidget {
                   inputType: TextInputType.phone,
                   controlller: phoneCntrlr,
                   onchange: (val) {
-                    phoneCntrlr.text.length == 10
-                        ? isEnable.value = true
-                        : isEnable.value = false;
+                    phoneCntrlr.text.length == 10 ? isEnable.value = true : isEnable.value = false;
                   },
                 ),
                 const SizedBox(height: 10),
