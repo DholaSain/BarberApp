@@ -28,13 +28,16 @@ class BHomeView extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: bSalonCntrlr.salons!.length,
                   itemBuilder: (context, index) {
-                    return SalonCardFull(
-                        salon: bSalonCntrlr.salons![index],
-                        images: bSalonCntrlr.salons![index].images!,
-                        ontap: () {
-                          Get.to(() => BSalonDetails(
-                              salonId: bSalonCntrlr.salons![index].uid!));
-                        });
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SalonCardFull(
+                          salon: bSalonCntrlr.salons![index],
+                          images: bSalonCntrlr.salons![index].images!,
+                          ontap: () {
+                            Get.to(() => BSalonDetails(
+                                salonId: bSalonCntrlr.salons![index].uid!));
+                          }),
+                    );
                   }),
               Container(
                 margin: const EdgeInsets.all(15),

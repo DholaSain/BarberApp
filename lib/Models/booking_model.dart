@@ -11,6 +11,7 @@ class BookingModel {
   double? longitude;
   double? latitude;
   bool? isHomeService;
+  bool? isSalonRated;
   DateTime? bookedAt;
   DateTime? bookingForTime;
   double? totalAmount;
@@ -27,6 +28,7 @@ class BookingModel {
     this.longitude,
     this.latitude,
     this.isHomeService,
+    this.isSalonRated,
     this.bookedAt,
     this.bookingForTime,
     this.totalAmount,
@@ -44,6 +46,7 @@ class BookingModel {
     longitude = docs.get('longitude');
     latitude = docs.get('latitude');
     isHomeService = docs.get('isHomeService');
+    isSalonRated = docs.get('isSalonRated');
     bookedAt = (docs.get('bookedAt') as Timestamp).toDate();
     bookingForTime = (docs.get('bookingForTime') as Timestamp).toDate();
     totalAmount = docs.get('totalAmount');
@@ -62,6 +65,7 @@ class BookingModel {
     _data['longitude'] = longitude;
     _data['latitude'] = latitude;
     _data['isHomeService'] = isHomeService;
+    _data['isSalonRated'] = isSalonRated;
     _data['bookedAt'] = bookedAt;
     _data['bookingForTime'] = bookingForTime;
     _data['totalAmount'] = totalAmount;

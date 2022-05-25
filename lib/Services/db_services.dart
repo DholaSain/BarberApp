@@ -201,6 +201,7 @@ class DBServices {
     return firestore
         .collection(bookings)
         .where('customerId', isEqualTo: userId)
+        .orderBy('bookedAt', descending: true)
         .snapshots()
         .map((QuerySnapshot snapshot) {
       List<BookingModel> retVal = [];
@@ -215,6 +216,7 @@ class DBServices {
     return firestore
         .collection(bookings)
         .where('ownerId', isEqualTo: userId)
+        .orderBy('bookedAt', descending: true)
         .snapshots()
         .map((QuerySnapshot snapshot) {
       List<BookingModel> retVal = [];
@@ -223,5 +225,12 @@ class DBServices {
       }
       return retVal;
     });
+  }
+
+  Future<void> updateBookingStatus(String bookingId, String status) async {
+    await firestore
+        .collection(bookings)
+        .doc(bookingId)
+        .update({'status': status});
   }
 }

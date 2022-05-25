@@ -243,6 +243,7 @@ class CheckOutView extends StatelessWidget {
                     longitude: lng,
                     latitude: lat,
                     isHomeService: typeOfServices.value == 1 ? true : false,
+                    isSalonRated: false,
                     bookedAt: DateTime.now(),
                     bookingForTime: bookingdateTime,
                     totalAmount: total,

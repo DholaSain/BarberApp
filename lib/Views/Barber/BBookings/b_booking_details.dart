@@ -3,8 +3,10 @@ import 'package:barber/Constants/statuses.dart';
 import 'package:barber/Constants/text_styles.dart';
 import 'package:barber/Controllers/b_salon_controller.dart';
 import 'package:barber/Controllers/salon_controller.dart';
+import 'package:barber/Methods/status_update.dart';
 import 'package:barber/Models/booking_model.dart';
 import 'package:barber/Models/salon_model.dart';
+import 'package:barber/Services/db_services.dart';
 import 'package:barber/Views/Widgets/buttons.dart';
 import 'package:barber/Views/Widgets/mycontainer.dart';
 import 'package:flutter/cupertino.dart';
@@ -234,39 +236,43 @@ class BBookingDetails extends StatelessWidget {
                       // ),
                     )
                   ])),
-          const SizedBox(height: 10),
-          DynamicHeavyButton(
-            horizontalMargin: 10,
-            isEnable: true.obs,
-            ontap: () {},
-            lable: 'Mark as Completed',
-            width: double.infinity,
-          ),
-          const SizedBox(height: 10),
-          DynamicHeavyButton(
-            color: kErrorColor,
-            height: 40,
-            horizontalMargin: 10,
-            isEnable: true.obs,
-            ontap: () {
-              Get.defaultDialog(
-                title: 'Are you sure?',
-                contentPadding: const EdgeInsets.only(bottom: 0),
-                content: Column(
-                  children: [
-                    const Text('Do you really want to reject this booking?'),
-                    const SizedBox(height: 4),
-                    const Divider(),
-                    TextButton(onPressed: () {}, child: Text('Reject'))
-                    // CupertinoActionSheetAction(
-                    //     onPressed: () {}, child: Text('Reject'))
-                  ],
-                ),
-              );
-            },
-            lable: 'Reject Booking',
-            width: double.infinity,
-          ),
+          booking.status == statusValues[0]
+              ? DynamicHeavyButton(
+                  horizontalMargin: 10,
+                  isEnable: true.obs,
+                  ontap: () {
+                    statusUpdateDialogBox(
+                        context,
+                        'Mark it completed, only if you have done the services.',
+                        'Complete',
+                        statusValues[1],
+                        booking.uid!);
+                  },
+                  lable: 'Mark as Completed',
+                  width: double.infinity,
+                  verticalMargin: 10,
+                )
+              : const SizedBox(),
+          booking.status == statusValues[0]
+              ? booking.bookingForTime!.isAfter(DateTime.now())
+                  ? DynamicHeavyButton(
+                      color: kErrorColor,
+                      horizontalMargin: 10,
+                      isEnable: true.obs,
+                      verticalMargin: 10,
+                      ontap: () {
+                        statusUpdateDialogBox(
+                            context,
+                            'By rejecting the booking, you won\'t be able to undo this action',
+                            'Reject',
+                            statusValues[2],
+                            booking.uid!);
+                      },
+                      lable: 'Reject Booking',
+                      width: double.infinity,
+                    )
+                  : const SizedBox()
+              : const SizedBox(),
         ])));
   }
 }

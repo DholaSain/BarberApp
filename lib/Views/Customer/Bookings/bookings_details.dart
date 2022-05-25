@@ -1,19 +1,27 @@
+import 'dart:developer';
+
 import 'package:barber/Constants/colors.dart';
 import 'package:barber/Constants/statuses.dart';
 import 'package:barber/Constants/text_styles.dart';
 import 'package:barber/Controllers/salon_controller.dart';
+import 'package:barber/Methods/status_update.dart';
 import 'package:barber/Models/booking_model.dart';
 import 'package:barber/Models/salon_model.dart';
 import 'package:barber/Views/Widgets/buttons.dart';
 import 'package:barber/Views/Widgets/mycontainer.dart';
+import 'package:barber/Views/Widgets/text_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:glyphicon/glyphicon.dart';
 import 'package:intl/intl.dart';
 
 class BookingDetails extends StatelessWidget {
   BookingDetails({Key? key, required this.booking}) : super(key: key);
   final BookingModel booking;
   final SalonsController salonsController = Get.find<SalonsController>();
+  double ratingValue = 5.0;
+  final TextEditingController reviewController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     SalonModel salon = salonsController.salons!
@@ -231,7 +239,75 @@ class BookingDetails extends StatelessWidget {
                       //   zoomControlsEnabled: false,
                       // ),
                     )
-                  ]))
+                  ])),
+          booking.status == statusValues[0]
+              ? DynamicHeavyButton(
+                  color: kAmberColor,
+                  horizontalMargin: 10,
+                  isEnable: true.obs,
+                  verticalMargin: 10,
+                  ontap: () {
+                    statusUpdateDialogBox(
+                        context,
+                        'By Cancelling booking, you won\'t be able to undo this action',
+                        'Cancel Booking',
+                        statusValues[3],
+                        booking.uid!);
+                  },
+                  lable: 'Cancel Booking',
+                  width: double.infinity,
+                )
+              : const SizedBox(),
+          const SizedBox(height: 10),
+          booking.status == statusValues[1]
+              ? MyContainer(
+                  isShadow: true,
+                  hPadding: 10,
+                  vPadding: 10,
+                  hMargin: 10,
+                  radius: 8,
+                  color: kWhiteColor,
+                  child: booking.isSalonRated!
+                      ? const Text('Thanks for Feedback')
+                      : Column(
+                          children: [
+                            const SizedBox(height: 10),
+                            const Text('Please rate the Salon',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18)),
+                            const SizedBox(height: 8),
+                            RatingBar.builder(
+                                initialRating: 5,
+                                allowHalfRating: true,
+                                itemBuilder: ((context, index) => const Icon(
+                                    Glyphicon.star_fill,
+                                    color: kMainColor)),
+                                itemPadding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                itemSize: 35,
+                                onRatingUpdate: (value) {
+                                  ratingValue = value;
+                                  log(ratingValue.toString());
+                                }),
+                            // const SizedBox(height: 10),
+                            const Divider(),
+                            ChildTextField(
+                              title: 'Review',
+                              titleStyle: kH4,
+                              hintText: 'Please write feedback',
+                              lines: 3,
+                              controlller: reviewController,
+                            ),
+                            const SizedBox(height: 10),
+                            DynamicHeavyButton(
+                                width: double.infinity,
+                                isEnable: true.obs,
+                                ontap: () async {},
+                                lable: 'Submit Review')
+                          ],
+                        ))
+              : const SizedBox(),
+          const SizedBox(height: 60),
         ])));
   }
 }
